@@ -1,33 +1,32 @@
-from Cliente import Cliente, buscar
+from Lista import Lista
 
 
-class Venta(Cliente):
+class Venta(Lista):
 
-    def __init__(self, rfc, nombre, fecha, total, lista_ventas):
-        super().__init__(rfc, nombre, fecha, lista_ventas)
-        self.codigo = rfc
+    def __init__(self, cliente="", detalle=0, fecha="", total=0):
+        super().__init__()
+        self.cliente = cliente
+        self.detalle = detalle
+        self.fecha = fecha
         self.total = total
-        self.detalle_productos = nombre
-        self.fecha=fecha
-        self.lista_ventas = lista_ventas
 
 
-lista_ventas = []
+if __name__ == "__main__":
+    venta = Lista()
+    venta1 = Venta("1001", 20, "2022",30000)
+    venta2 = Venta("1002", 30, "2023",49000)
+    venta3 = Venta("1003", 4, "2021",2000)
+    venta.crear(venta1)
+    venta.crear(venta2)
+    venta.crear(venta3)
+    venta_nueva = Venta("1000", 21, "2020",310000)
+    venta.actualizar(2, venta_nueva)
+    venta.eliminar(1)
+    listado = venta.mostrar()
 
-
-def modificar(venta_modificar, cliente, detalle_productos, fecha, total, lista_ventas):
-    modificarc = buscar(venta_modificar, lista_ventas)
-    if modificarc:
-        print(modificarc)
-        lista_ventas.remove(modificarc)
-        cliente = Venta(cliente, detalle_productos, fecha, total, lista_ventas)
-        lista_ventas.append(cliente)
-    else:
-        print("no existe")
-
-
-def mostrar(lista_ventas):
-    for venta in lista_ventas:
+    for ventas in listado:
         print("---------------------------")
-        print("Cliente |Detalle |Fecha| Total")
-        print(f"{venta.codigo} |{venta.detalle_productos} |{venta.fecha} |{venta.total} ")
+        print(f"{ventas.cliente} |{ventas.detalle}|{ventas.fecha} |{ventas.total}")
+
+
+
